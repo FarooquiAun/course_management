@@ -1,20 +1,12 @@
 package com.course.entites;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.security.PrivateKey;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +22,66 @@ public class Review {
     @JoinColumn(name = "course_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
+
+    public Review(String comment, Course course, LocalDateTime createdAt, Long id, Integer rating, User user) {
+        this.comment = comment;
+        this.course = course;
+        this.createdAt = createdAt;
+        this.id = id;
+        this.rating = rating;
+        this.user = user;
+    }
+
+    public Review() {
+
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
