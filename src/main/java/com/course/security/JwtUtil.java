@@ -25,7 +25,7 @@ public class JwtUtil {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    private String extractUserName(String token){
+    public String extractUserName(String token){
         return extractClaim(token,Claims::getSubject);
     }
     public Date extractExpiration(String token) {
@@ -40,7 +40,7 @@ public class JwtUtil {
         return Jwts.parser().setSigningKey(String.valueOf(secret)).parseClaimsJws(token).getBody();
     }
 
-    private boolean validateToken(String token, UserDetails userDetail){
+    public boolean validateToken(String token, UserDetails userDetail){
         final String userName=extractUserName(token);
         return (userName.equals(userDetail.getUsername()) && !isTokenExpired(token));
     }
